@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>系统首页</title>
+</head>
+
+<body>
+<table>
+  <tr>
+    <td> [[${_user}]],欢迎您的登录。</td><td> <a th:href="@{/logout}" class="app-logout">注销</a></td>
+  </tr>
+</table>
+<table style="border: 1px solid #666;margin-top: 20px">
+  <tr>
+    <td>一:设备测试</td><td><a th:href="@{/device/getList}">进入</a></td>
+  </tr>
+  <tr>
+    <td>一:Quartz测试</td>
+    <td>
+      <form id="quartz_form" th:href="@{/quartz/doJob}" >
+        <button type="button" onclick="doJob()">进入</button>
+      </form>
+    </td>
+  </tr>
+  <tr>
+    <td>二:spring宏测试</td><td><a href="${request_url}/funtion/getMessage">进入</a></td>
+  </tr>
+  <tr>
+    <td>三:scope测试</td><td><a href="${request_url}/scope/scope">进入</a></td>
+  </tr>
+  <tr>
+    <td>四:ModelAttribute:测试</td><td>
+    <a href="${request_url}/modelattributes/show">进入1</a>
+    <a href="${request_url}/modelattributes2/show">进入2</a>
+    <a href="${request_url}/sessionattributes/show">进入Session</a>
+    <a href="${request_url}/sessionattributes2/show">进入Session2</a>
+  </td>
+  </tr>
+  <tr>
+    <td>五:Restful测试</td><td><a href="${request_url}/restful/rest">进入</a></td>
+  </tr>
+</table>
+</body>
+
+<script th:src="@{/js/jquery/jquery-3.3.1.min.js}"></script>
+<script th:inline="javascript">
+
+  function doJob(){
+    var requestUrl = $("#quartz_form").attr("href");
+    jQuery.ajax({
+      type: "POST",
+      url:requestUrl,
+      data:$('#formId').serialize(),
+      success : function(data) {
+        alert(data);
+      }
+    });
+  }
+
+</script>
+
+
+</html>

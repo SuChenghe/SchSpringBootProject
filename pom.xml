@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.suchenghe</groupId>
+  <artifactId>SchSpringBootProject</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
+
+  <name>SchSpringBootProject</name>
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.1.1.RELEASE</version>
+    <relativePath/> <!-- lookup parent from repository -->
+  </parent>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <jdk.version>1.8</jdk.version>
+
+    <mybatis-spring-boot-starter>1.3.2</mybatis-spring-boot-starter>
+    <mysql-connector-java>8.0.11</mysql-connector-java>
+    <redis.clients.jedis>2.9.0</redis.clients.jedis>
+    <org.mongodb.driver>3.9.1</org.mongodb.driver>
+    <org.ehcache>3.6.1</org.ehcache>
+
+    <com.alibaba.fastjson>1.2.32</com.alibaba.fastjson>
+    <org.projectlombok.lombok>1.16.12</org.projectlombok.lombok>
+    <org.apache.commons.lang3>3.7</org.apache.commons.lang3>
+    <org.apache.poi.poi>4.0.0</org.apache.poi.poi>
+    <org.apache.poi.poiooxml>4.0.0</org.apache.poi.poiooxml>
+
+    <net.sourceforge.nekohtml>1.9.22</net.sourceforge.nekohtml>
+
+  </properties>
+
+  <dependencies>
+    <!--+++++++++++++++++++++++++spring-boot相关++++++++++++++++++++++-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+      <exclusions>
+        <!--排除默认的tomcat-jdbc-->
+        <exclusion>
+          <groupId>org.apache.tomcat</groupId>
+          <artifactId>tomcat-jdbc</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <!--@ConfigurationProperties-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-configuration-processor</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <!--aop-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-aop</artifactId>
+    </dependency>
+    <!--+++++++++++++++++++++++++spring-boot相关++++++++++++++++++-->
+
+    <!--+++++++++++++++++++++++++数据存储相关++++++++++++++++++++++++-->
+    <!-- mybatis一定要使用starter，不然无法自动配置和注入 -->
+    <dependency>
+      <groupId>org.mybatis.spring.boot</groupId>
+      <artifactId>mybatis-spring-boot-starter</artifactId>
+      <version>${mybatis-spring-boot-starter}</version>
+    </dependency>
+    <!--HikariCP连接池,从父依赖获取额版本-->
+    <dependency>
+      <groupId>com.zaxxer</groupId>
+      <artifactId>HikariCP</artifactId>
+    </dependency>
+    <!--mysql-->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>${mysql-connector-java}</version>
+    </dependency>
+    <!--redis-->
+    <dependency>
+      <groupId>redis.clients</groupId>
+      <artifactId>jedis</artifactId>
+      <version>${redis.clients.jedis}</version>
+    </dependency>
+    <!--mongodb-->
+    <!--<dependency>-->
+    <!--<groupId>org.mongodb</groupId>-->
+    <!--<artifactId>mongodb-driver</artifactId>-->
+    <!--<version>${org.mongodb.driver}</version>-->
+    <!--</dependency>-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-cache</artifactId>
+    </dependency>
+    <!--Ehcache缓存-->
+    <dependency>
+      <groupId>org.ehcache</groupId>
+      <artifactId>ehcache</artifactId>
+      <version>${org.ehcache}</version>
+    </dependency>
+
+    <!--+++++++++++++++++++++++++工具类++++++++++++++++++++++++-->
+    <!--JSON解析工具fastjson-->
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
+      <version>${com.alibaba.fastjson}</version>
+    </dependency>
+    <!--Lombok-->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>${org.projectlombok.lombok}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>${org.apache.commons.lang3}</version>
+    </dependency>
+    <!-- Apache POI提供API给Java程式对Microsoft Office格式档案读和写的功能 -->
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi</artifactId>
+      <version>${org.apache.poi.poi}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi-ooxml</artifactId>
+      <version>${org.apache.poi.poiooxml}</version>
+    </dependency>
+
+    <!--+++++++++++++++++++++++++页面相关++++++++++++++++++++++++-->
+    <!--视图解析器-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-thymeleaf</artifactId>
+    </dependency>
+    <!--NekoHTML是一个简单地HTML扫描器和标签补偿器(tag balancer)，使得程序能解析HTML文档并用标准的XML接口来访问其中的信息。-->
+    <dependency>
+      <groupId>net.sourceforge.nekohtml</groupId>
+      <artifactId>nekohtml</artifactId>
+      <version>${net.sourceforge.nekohtml}</version>
+    </dependency>
+    <!--+++++++++++++++++++++++++页面相关++++++++++++++++++++++++-->
+  </dependencies>
+
+  <build>
+    <plugins>
+      <!-- spring Boot在编译的时候，是有默认JDK版本的，如果我们期望使用我们要的JDK版本的话，如下配置 -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.1</version>
+        <configuration>
+          <source>${jdk.version}</source>
+          <target>${jdk.version}</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

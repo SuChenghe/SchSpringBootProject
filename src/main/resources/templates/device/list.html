@@ -1,0 +1,114 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script th:src="@{/js/jquery/jquery-3.3.1.min.js}"></script>
+    <style type="text/css">
+        table{
+            border-collapse:collapse;
+        }
+        table tr{
+            border: 1px solid #303746;
+        }
+        table tr td{
+            border: 1px solid #303746;
+        }
+    </style>
+</head>
+<body>
+    <table >
+        <tr style="border-color: white">
+            <td><input name="deviceName" th:value="${deviceName}" /></td>
+            <td>
+                <select name="deviceStatus" id="deviceStatusId" >
+                    <option th:each="device:${deviceBeanList}"
+                            th:value="${device.deviceStatus}"
+                            th:text="${device.deviceStatus}">
+                    </option>
+                </select>
+            </td>
+        </tr>
+        <tr><td>
+            <button onclick="reset()" >重置</button>
+            <button onclick="getList()" >获取通行证信息</button>
+            <button onclick="addData()" >添加</button>
+            <button onclick="clearCache()" >清除cache</button>
+        </td></tr>
+    </table>
+    <div style="height:500px;overflow-y: auto">
+        <table id="tableId">
+
+        </table>
+    </div>
+</body>
+
+<!--内联文本：[[...]]内联文本的表示方式，使用时，必须先用th:inline=”text/javascript/none”激活-->
+
+<script th:inline="javascript">
+    jQuery(function () {
+        var deviceName = [[${deviceName}]];
+//        alert(deviceName);
+    });
+
+    function getList(){
+        var deviceStatus = $("#deviceStatusId").val();
+        var content ='<tr><td>设备编号</td><td>设备名称</td><td>设备状态</td><td>设备操作</td></tr>' ;
+        jQuery.ajax({
+            type : "POST",
+            url : "getList",
+            dataType : 'json',
+            data:{deviceStatus:deviceStatus},
+            success : function(data) {
+                var deviceList = data;
+                for(var i=0;i<deviceList.length;i++){
+                    var device = deviceList[i];
+                    content = content+'<tr><td>'+device.deviceCode+'</td>' +
+                    '<td>'+device.deviceName+'</td>' +
+                    '<td>'+device.deviceStatus+'</td>'+
+                    '<td><button onclick="deleteData('+device.id+')" >删除</button></td></tr>';
+                }
+                $("#tableId").html(content);
+            }
+        });
+    }
+
+    function reset(){
+        $("#tableId").html("");
+    }
+
+    function deleteData(id){
+        jQuery.ajax({
+            type : "POST",
+            url : "deleteData",
+            dataType : 'json',
+            data:{id:id},
+            success : function(data) {
+                if(data=='success'){
+                    getList();
+                }
+            }
+        });
+    }
+
+    function clearCache(){
+      var deviceStatus = $("#deviceStatusId").val();
+      jQuery.ajax({
+        type : "POST",
+        url : "clearCache",
+        dataType : 'json',
+        data:{deviceStatus:deviceStatus},
+        success : function(data) {
+          if(data=='success'){
+            alert("清除成功");
+          }
+        }
+      });
+    }
+
+    function addData(){
+        window.location.href="add";     //在同当前窗口中打开窗口
+    }
+
+</script>
+
+
+</html>

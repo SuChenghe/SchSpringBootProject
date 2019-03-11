@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script th:src="@{/js/jquery/jquery-3.3.1.min.js}"></script>
+</head>
+<body>
+    <form id="formId" th:href="@{/device/save}" >
+        <table border="1">
+            <tr>
+                <th>设备编号</th>
+                <th>设备名称</th>
+                <th>状态</th>
+            </tr>
+            <tr>
+                <td><input type="text" name="deviceCode" /></td>
+                <td><input type="text" name="deviceName" /></td>
+                <td><input type="text" name="deviceStatus" /></td>
+                <td> <button type="button" onclick="saveDate()" >提交</button></td>
+            </tr>
+        </table>
+    </form>
+</body>
+
+<!--内联文本：[[...]]内联文本的表示方式，使用时，必须先用th:inline=”text/javascript/none”激活-->
+
+<script th:inline="javascript">
+    var contextPath;
+    jQuery(function () {
+        var deviceName = [[${deviceName}]];
+//        alert(deviceName);
+    });
+
+    function saveDate(){
+        var requestUrl = $("#formId").attr("href");
+        jQuery.ajax({
+            type: "POST",
+            url:requestUrl,
+            data:$('#formId').serialize(),// 序列化表单值
+            success : function(data) {
+               var returnVal =  eval("("+data+")");
+               if(returnVal=='success'){
+                   window.location.href="getList";
+               }
+            }
+        });
+    }
+
+</script>
+
+
+</html>
