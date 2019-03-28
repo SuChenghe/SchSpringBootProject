@@ -1,7 +1,7 @@
 package com.suchenghe.service.impl;
 
-import com.suchenghe.dao.mysql.datasourcemapperfirst.UserInfoMapper;
-import com.suchenghe.dao.mysql.pojo.UserInfo;
+import com.suchenghe.dao.mysql.mybatis.datasourcemapperfirst.UserInfoMapper;
+import com.suchenghe.dao.mysql.mybatis.pojo.UserInfo;
 import com.suchenghe.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,14 +1,15 @@
 package com.suchenghe.web.device;
 
 import com.alibaba.fastjson.JSON;
-import com.suchenghe.dao.mysql.pojo.DeviceBean;
+import com.suchenghe.dao.mysql.config.MysqlHikariDataSource1;
+import com.suchenghe.dao.mysql.jpa.pojo.JpaDeviceBean;
+import com.suchenghe.dao.mysql.mybatis.pojo.DeviceBean;
 import com.suchenghe.service.DeviceBeanService;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -30,6 +31,9 @@ public class DeviceController {
     @Autowired
     protected DeviceBeanService deviceService;
 
+    @Autowired
+    MysqlHikariDataSource1 mysqlHikariDataSource1;
+
     @RequestMapping(value = "/getList", method = RequestMethod.GET)
     public String getList(ModelMap modelMap) {
         modelMap.put("deviceName", "设备状态");
@@ -46,9 +50,15 @@ public class DeviceController {
     @RequestMapping(value = "/getList", method = RequestMethod.POST)
     @ResponseBody
     public String getList(DeviceBean deviceBean) {
+        //mybatis查询
         List<DeviceBean> list = deviceService.getByCondition(deviceBean);
         List<DeviceBean> list2 = deviceService.getByCondition2(deviceBean);
         list.addAll(list2);
+        //jpa查询
+        JpaDeviceBean jpaDeviceBean = new JpaDeviceBean();
+        jpaDeviceBean.setDeviceStatus("1");
+        List<JpaDeviceBean> list3 = deviceService.getByCondition(jpaDeviceBean);
+
         return JSON.toJSONString(list);
     }
 

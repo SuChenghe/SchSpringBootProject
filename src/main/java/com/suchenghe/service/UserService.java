@@ -1,6 +1,6 @@
 package com.suchenghe.service;
 
-import com.suchenghe.dao.mysql.pojo.UserInfo;
+import com.suchenghe.dao.mysql.mybatis.pojo.UserInfo;
 
 /**
  * @author SuChenghe

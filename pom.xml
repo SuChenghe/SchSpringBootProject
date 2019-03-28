@@ -44,18 +44,16 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
-      <exclusions>
-        <!--排除默认的tomcat-jdbc-->
-        <exclusion>
-          <groupId>org.apache.tomcat</groupId>
-          <artifactId>tomcat-jdbc</artifactId>
-        </exclusion>
-      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
+    </dependency>
+    <!--Actuator监控-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
     </dependency>
     <!--@ConfigurationProperties-->
     <dependency>
@@ -71,6 +69,11 @@
     <!--+++++++++++++++++++++++++spring-boot相关++++++++++++++++++-->
 
     <!--+++++++++++++++++++++++++数据存储相关++++++++++++++++++++++++-->
+    <!--JPA-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
     <!-- mybatis一定要使用starter，不然无法自动配置和注入 -->
     <dependency>
       <groupId>org.mybatis.spring.boot</groupId>
@@ -139,6 +142,17 @@
       <groupId>org.apache.poi</groupId>
       <artifactId>poi-ooxml</artifactId>
       <version>${org.apache.poi.poiooxml}</version>
+    </dependency>
+    <!--在线api文档-->
+    <dependency>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-swagger2</artifactId>
+      <version>2.9.2</version>
+    </dependency>
+    <dependency>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-swagger-ui</artifactId>
+      <version>2.9.2</version>
     </dependency>
 
     <!--+++++++++++++++++++++++++页面相关++++++++++++++++++++++++-->

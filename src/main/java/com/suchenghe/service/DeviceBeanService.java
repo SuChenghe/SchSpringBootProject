@@ -1,6 +1,7 @@
 package com.suchenghe.service;
 
-import com.suchenghe.dao.mysql.pojo.DeviceBean;
+import com.suchenghe.dao.mysql.jpa.pojo.JpaDeviceBean;
+import com.suchenghe.dao.mysql.mybatis.pojo.DeviceBean;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 
@@ -30,6 +31,8 @@ public interface DeviceBeanService {
     List<DeviceBean> getByCondition(DeviceBean deviceBean);
 
     List<DeviceBean> getByCondition2(DeviceBean deviceBean);
+
+    List<JpaDeviceBean> getByCondition(JpaDeviceBean deviceBean);
 
     List<DeviceBean> getByIdList(List<Long> idList);
 

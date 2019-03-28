@@ -1,4 +1,4 @@
-package com.suchenghe.dao.mysql.config;
+package com.suchenghe.dao.mysql.mybatis;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -17,14 +17,14 @@ import javax.sql.DataSource;
  * @date 2018/12/7 17:37
  */
 @Configuration
-@MapperScan(basePackages = "com.suchenghe.dao.mysql.datasourcemappersecond", sqlSessionTemplateRef = "mysqlSqlSessionTemplate2")
+@MapperScan(basePackages = "com.suchenghe.dao.mysql.mybatis.datasourcemappersecond", sqlSessionTemplateRef = "mysqlSqlSessionTemplate2")
 public class MysqlSqlSession2 {
 
     @Bean(name = "mysqlSqlSessionFactory2")
     public SqlSessionFactory testSqlSessionFactory(@Qualifier("mysqlDataSource2") DataSource dataSource) throws Exception {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(dataSource);
-        bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mybatis/mapper/datasource2/*.xml"));
+        bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:dao/mybatis/mapper/datasource2/*.xml"));
         return bean.getObject();
     }
 

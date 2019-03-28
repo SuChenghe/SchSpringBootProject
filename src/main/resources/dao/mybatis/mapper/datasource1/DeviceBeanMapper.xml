@@ -5,12 +5,12 @@
 
 <!--  MAPPER ; CREATE AT BY SuChenghe-->
 <!--注意，因为代码更改，这里namespace为dao类的地址-->
-<mapper namespace="com.suchenghe.dao.mysql.datasourcemappersecond.DeviceBeanMapper2">
+<mapper namespace="com.suchenghe.dao.mysql.mybatis.datasourcemapperfirst.DeviceBeanMapper">
 
     <!--<sql id="SEQUENCE_DEVICE" >SELECT SEQ_DEVICE_BEAN.NEXTVAL FROM DUAL</sql>-->
 
     <!--设备映射-->
-    <resultMap type="com.suchenghe.dao.mysql.pojo.DeviceBean" id="DeviceBeanResultMap">
+    <resultMap type="com.suchenghe.dao.mysql.mybatis.pojo.DeviceBean" id="DeviceBeanResultMap">
         <result property="id" column="ID"/>
         <result property="deviceCode" column="DEVICE_CODE"/>
         <result property="deviceName" column="DEVICE_NAME"/>
@@ -19,9 +19,9 @@
     </resultMap>
 
     <!--插入语句-->
-    <insert id="insertDevice" useGeneratedKeys="true" keyProperty="id" parameterType="com.suchenghe.dao.mysql.pojo.DeviceBean">
-        INSERT INTO DEVICE_BEAN(DEVICE_CODE,DEVICE_NAME,CREATE_TIME)
-        values(#{deviceCode},#{deviceName},#{createTime})
+    <insert id="insertDevice" useGeneratedKeys="true" keyProperty="id" parameterType="com.suchenghe.dao.mysql.mybatis.pojo.DeviceBean">
+        INSERT INTO DEVICE_BEAN(DEVICE_CODE,DEVICE_NAME,DEVICE_STATUS)
+        values(#{deviceCode},#{deviceName},#{deviceStatus})
     </insert>
     <!--oracle-->
     <!--<insert id="insertDevice" keyProperty="id" keyColumn="ID" parameterType="com.suchenghe.dao.pojo.DeviceBean">-->
@@ -33,7 +33,7 @@
     <!--</insert>-->
 
     <!-- 更新设备信息 -->
-    <update id="updateDevice" parameterType="com.suchenghe.dao.mysql.pojo.DeviceBean" >
+    <update id="updateDevice" parameterType="com.suchenghe.dao.mysql.mybatis.pojo.DeviceBean" >
         UPDATE DEVICE_BEAN
         <set>
             CREATE_TIME = SYSDATE
@@ -44,10 +44,11 @@
 
     <!--获取设备列表-->
     <select id="getByCondition"  resultMap="DeviceBeanResultMap"
-            parameterType="com.suchenghe.dao.mysql.pojo.DeviceBean" >
+            parameterType="com.suchenghe.dao.mysql.mybatis.pojo.DeviceBean" >
         SELECT ID,DEVICE_CODE,DEVICE_NAME,DEVICE_STATUS,CREATE_TIME FROM DEVICE_BEAN
         <where>
-            <if test="createTime!=null and 1 !=null"><!--仅为测试and效果-->
+            <!--<if test="createTime!=null and 1 !=null">仅为测试and效果-->
+            <if test="createTime!=null">
                 AND CREATE_TIME>= #{createTime}
             </if>
             <if test="deviceName!=null">
@@ -57,7 +58,8 @@
             <choose>
                 <when test="deviceStatus==1"> AND DEVICE_STATUS = 1 </when>
                 <when test="deviceStatus==2"> AND DEVICE_STATUS = 2 </when>
-                <otherwise> AND DEVICE_STATUS = 3 </otherwise>
+                <when test="deviceStatus==3"> AND DEVICE_STATUS = 3 </when>
+                <otherwise> AND DEVICE_STATUS NOT IN (1,2,3) </otherwise>
             </choose>
         </where>
     </select>

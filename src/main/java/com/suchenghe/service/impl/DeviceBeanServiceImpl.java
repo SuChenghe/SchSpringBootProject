@@ -1,8 +1,10 @@
 package com.suchenghe.service.impl;
 
-import com.suchenghe.dao.mysql.datasourcemapperfirst.DeviceBeanMapper;
-import com.suchenghe.dao.mysql.datasourcemappersecond.DeviceBeanMapper2;
-import com.suchenghe.dao.mysql.pojo.DeviceBean;
+import com.suchenghe.dao.mysql.jpa.dao.DeviceBeanDao;
+import com.suchenghe.dao.mysql.jpa.pojo.JpaDeviceBean;
+import com.suchenghe.dao.mysql.mybatis.datasourcemapperfirst.DeviceBeanMapper;
+import com.suchenghe.dao.mysql.mybatis.datasourcemappersecond.DeviceBeanMapper2;
+import com.suchenghe.dao.mysql.mybatis.pojo.DeviceBean;
 import com.suchenghe.service.DeviceBeanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,8 @@ public class DeviceBeanServiceImpl implements DeviceBeanService {
     DeviceBeanMapper deviceBeanMapper;
     @Autowired
     DeviceBeanMapper2 deviceBeanMapper2;
+    @Autowired
+    DeviceBeanDao deviceBeanDao;
 
     @Override
     public int insertDevice(DeviceBean deviceBean) {
@@ -40,6 +44,12 @@ public class DeviceBeanServiceImpl implements DeviceBeanService {
     @Override
     public List<DeviceBean> getByCondition2(DeviceBean deviceBean) {
         List<DeviceBean> list = deviceBeanMapper2.getByCondition(deviceBean);
+        return list;
+    }
+
+    @Override
+    public List<JpaDeviceBean> getByCondition(JpaDeviceBean jpaDeviceBean) {
+        List<JpaDeviceBean> list = deviceBeanDao.findAllByDeviceStatus(jpaDeviceBean.getDeviceStatus());
         return list;
     }
 

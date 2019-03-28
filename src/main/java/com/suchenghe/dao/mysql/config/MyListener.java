@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.util.Enumeration;
 
 /**
+ * 显式的解除注册
+ *
  * @author SuChenghe
  * @date 2018/12/22 14:31
  */

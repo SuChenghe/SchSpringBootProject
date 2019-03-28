@@ -18,7 +18,7 @@ import javax.sql.DataSource;
 @Component
 @Setter
 @Getter
-@PropertySource("classpath:mybatis/datasource/mysql2.properties")
+@PropertySource("classpath:dao/datasource/mysql2.properties")
 @ConfigurationProperties(prefix = "spring.datasource.myspring2")
 public class MysqlHikariDataSource2 {
     private String driverClassName;

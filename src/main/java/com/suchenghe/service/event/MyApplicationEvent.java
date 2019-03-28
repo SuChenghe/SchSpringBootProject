@@ -1,6 +1,6 @@
 package com.suchenghe.service.event;
 
-import com.suchenghe.dao.mysql.pojo.DeviceBean;
+import com.suchenghe.dao.mysql.mybatis.pojo.DeviceBean;
 import org.springframework.context.ApplicationEvent;
 
 import java.util.concurrent.TimeUnit;

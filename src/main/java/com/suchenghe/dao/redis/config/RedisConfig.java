@@ -14,7 +14,7 @@ import redis.clients.jedis.JedisPoolConfig;
  * @date 2018/12/4 13:37
  */
 @Component
-@PropertySource("classpath:jdbc/redis.properties")
+@PropertySource("classpath:dao/redis.properties")
 public class RedisConfig {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RedisConfig.class);

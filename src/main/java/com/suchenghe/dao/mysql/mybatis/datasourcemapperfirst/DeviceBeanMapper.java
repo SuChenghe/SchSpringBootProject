@@ -1,6 +1,6 @@
-package com.suchenghe.dao.mysql.datasourcemappersecond;
+package com.suchenghe.dao.mysql.mybatis.datasourcemapperfirst;
 
-import com.suchenghe.dao.mysql.pojo.DeviceBean;
+import com.suchenghe.dao.mysql.mybatis.pojo.DeviceBean;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
@@ -8,7 +8,7 @@ import java.util.List;
 
 @Mapper
 @Component
-public interface DeviceBeanMapper2 {
+public interface DeviceBeanMapper {
 
     int insertDevice(DeviceBean deviceBean);
 

@@ -1,4 +1,4 @@
-package com.suchenghe.dao.mysql.pojo;
+package com.suchenghe.dao.mysql.mybatis.pojo;
 
 import lombok.Data;
 
