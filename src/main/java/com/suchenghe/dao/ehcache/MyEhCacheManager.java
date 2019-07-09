@@ -31,9 +31,9 @@ import java.time.Duration;
  * @author SuChenghe
  * @date 2018/12/20 21:12
  */
-@Configuration
-@Getter
-@Setter
+//@Configuration
+//@Getter
+//@Setter
 public class MyEhCacheManager implements InitializingBean, DisposableBean {
 
     /***

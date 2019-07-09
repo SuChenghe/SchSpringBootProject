@@ -7,6 +7,9 @@ import com.suchenghe.dao.mysql.mybatis.pojo.DeviceBean;
 import com.suchenghe.service.DeviceBeanService;
 import java.util.ArrayList;
 import java.util.List;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -24,6 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @author SuChenghe
  * @date 2018/9/26 09:39
  */
+@Api(value = "设备请求控制器",description = "简单描述")
 @Controller("device_controller")
 @RequestMapping("/device")
 public class DeviceController {
@@ -34,6 +38,7 @@ public class DeviceController {
     @Autowired
     MysqlHikariDataSource1 mysqlHikariDataSource1;
 
+    @ApiOperation(value = "返回请求的页面",notes = "页面信息")
     @RequestMapping(value = "/getList", method = RequestMethod.GET)
     public String getList(ModelMap modelMap) {
         modelMap.put("deviceName", "设备状态");
@@ -47,6 +52,7 @@ public class DeviceController {
         return "device/list";
     }
 
+    @ApiOperation(value = "请求设备数据",notes = "设备信息列表")
     @RequestMapping(value = "/getList", method = RequestMethod.POST)
     @ResponseBody
     public String getList(DeviceBean deviceBean) {
