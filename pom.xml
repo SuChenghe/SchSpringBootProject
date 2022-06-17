@@ -29,7 +29,7 @@
     <org.mongodb.driver>3.9.1</org.mongodb.driver>
     <org.ehcache>3.6.1</org.ehcache>
 
-    <com.alibaba.fastjson>1.2.32</com.alibaba.fastjson>
+    <com.alibaba.fastjson>1.2.83</com.alibaba.fastjson>
     <org.projectlombok.lombok>1.16.12</org.projectlombok.lombok>
     <org.apache.commons.lang3>3.7</org.apache.commons.lang3>
     <org.apache.poi.poi>4.0.0</org.apache.poi.poi>
